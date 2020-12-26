@@ -63,10 +63,11 @@ const setUpGame = (window) => {
   window.document.body.style.margin = 0;
   window.document.body.style.overflow = "hidden";
   window.document.body.style.display = "flex";
+  window.document.body.style.background = "black";
   window.document.body.style.justifyContent = "center";
   window.document.body.style.alignItems = "center";
   window.document.body.innerHTML = `
-    <canvas width="${size}"  height="${size}" id="canvas" style="border:black solid 2px" />
+    <canvas width="${size}"  height="${size}" id="canvas" style="border:white solid 2px" />
   `;
   const ctx = window.document.getElementById("canvas").getContext("2d");
   const game = new Game(ctx, size);
