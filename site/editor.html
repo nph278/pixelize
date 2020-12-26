@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editor</title>
+  </head>
+  <body>
+    <canvas width="320" height="320" style="border: 2px solid black"></canvas
+    ><br />
+    <input type="color" id="color" />
+    <textarea id="output"></textarea>
+  </body>
+  <script>
+    let arr = [];
+    for (let i = 0; i < 8; i++) {
+      let z = [];
+      for (let j = 0; j < 8; j++) {
+        z.push("");
+      }
+      arr.push(z);
+    }
+    const ctx = document.querySelector("canvas").getContext("2d");
+    document.querySelector("canvas").addEventListener("click", ({ x, y }) => {
+      const col = document.querySelector("#color").value;
+      arr[Math.floor(x / 40)][Math.floor(y / 40)] = col;
+      ctx.fillStyle = col;
+      ctx.fillRect(Math.floor(x / 40) * 40, Math.floor(y / 40) * 40, 40, 40);
+      document.getElementById("output").value = btoa(JSON.stringify(arr));
+    });
+  </script>
+</html>
