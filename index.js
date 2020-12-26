@@ -54,7 +54,7 @@ class Game {
 }
 
 const setUpGame = (window) => {
-  const size =
+  let size =
     Math.floor(Math.min(window.innerHeight, window.innerWidth) / 100) * 100;
   window.document.body.style.margin = 0;
   window.document.body.style.overflow = "hidden";
@@ -66,11 +66,18 @@ const setUpGame = (window) => {
   `;
   const ctx = window.document.getElementById("canvas").getContext("2d");
   const game = new Game(ctx, size);
-  window.document.addEventListener("keydown", ({ key }) => {
+  window.addEventListener("keydown", ({ key }) => {
     game.keys[key] = true;
   });
-  window.document.addEventListener("keyup", ({ key }) => {
+  window.addEventListener("keyup", ({ key }) => {
     game.keys[key] = false;
+  });
+  window.addEventListener("resize", () => {
+    size =
+      Math.floor(Math.min(window.innerHeight, window.innerWidth) / 100) * 100;
+    window.document.querySelector("canvas").width = size;
+    window.document.querySelector("canvas").height = size;
+    game.size = size;
   });
   return game;
 };
