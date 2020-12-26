@@ -51,6 +51,10 @@ class Game {
       })
     );
   }
+  sound(file) {
+    const audio = new Audio(`${file}.mp3`);
+    audio.play();
+  }
 }
 
 const setUpGame = (window) => {
