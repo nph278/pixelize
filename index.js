@@ -1,21 +1,39 @@
+const keymap = {
+  up: "ArrowUp",
+  down: "ArrowDown",
+  left: "ArrowLeft",
+  right: "ArrowRight",
+  space: " ",
+};
 class Game {
-  constructor(ctx, width, height) {
+  constructor(ctx, size) {
     this.ctx = ctx;
-    this.width = width;
-    this.height = height;
+    this.size = size;
     this.sprites = {};
     this.update = () => {};
     this.draw = () => {};
     this.time = 0;
+    this.keys = {};
     setInterval(() => {
       this.update();
-      this.ctx.clearRect(0, 0, this.width, this.height);
+      this.ctx.clearRect(0, 0, this.size, this.size);
       this.draw();
       this.time++;
     }, 33);
   }
+  key(key) {
+    return !!this.keys[key in keymap ? keymap[key] : key];
+  }
   addSprite(name, sprite) {
-    this.sprites[name] = JSON.parse(atob(sprite));
+    let ready = 0;
+    const arr = sprite.split(".");
+    let newarr = [];
+    arr.forEach((e, i) => {
+      !ready && newarr.push(arr.slice(i, i + 8));
+      ready++;
+      ready %= 8;
+    });
+    this.sprites[name] = newarr;
   }
   sprite(name, x, y) {
     const sprite = this.sprites[name];
@@ -24,10 +42,10 @@ class Game {
         if (color !== "") {
           this.ctx.fillStyle = color;
           this.ctx.fillRect(
-            Math.floor(x + x1) * 10,
-            Math.floor(y + y1) * 10,
-            10,
-            10
+            (Math.floor(x + x1) * this.size) / 100,
+            (Math.floor(y + y1) * this.size) / 100,
+            this.size / 100,
+            this.size / 100
           );
         }
       })
@@ -35,16 +53,24 @@ class Game {
   }
 }
 
-const setUpGame = (document) => {
-  document.body.style.margin = 0;
-  document.body.style.overflow = "hidden";
-  document.body.innerHTML = `<canvas width="${
-    document.querySelector("html").clientWidth
-  }"  height="${
-    document.querySelector("html").clientHeight + 10
-  }" id="canvas" />`;
-  const ctx = document.getElementById("canvas").getContext("2d");
-  const width = document.querySelector("canvas").clientWidth;
-  const height = document.querySelector("canvas").clientHeight;
-  return new Game(ctx, width, height);
+const setUpGame = (window) => {
+  const size =
+    Math.floor(Math.min(window.innerHeight, window.innerWidth) / 100) * 100;
+  window.document.body.style.margin = 0;
+  window.document.body.style.overflow = "hidden";
+  window.document.body.style.display = "flex";
+  window.document.body.style.justifyContent = "center";
+  window.document.body.style.alignItems = "center";
+  window.document.body.innerHTML = `
+    <canvas width="${size}"  height="${size}" id="canvas" style="border:black solid 2px" />
+  `;
+  const ctx = window.document.getElementById("canvas").getContext("2d");
+  const game = new Game(ctx, size);
+  window.document.addEventListener("keydown", ({ key }) => {
+    game.keys[key] = true;
+  });
+  window.document.addEventListener("keyup", ({ key }) => {
+    game.keys[key] = false;
+  });
+  return game;
 };

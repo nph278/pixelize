@@ -26,7 +26,9 @@
       arr[Math.floor(x / 40)][Math.floor(y / 40)] = col;
       ctx.fillStyle = col;
       ctx.fillRect(Math.floor(x / 40) * 40, Math.floor(y / 40) * 40, 40, 40);
-      document.getElementById("output").value = btoa(JSON.stringify(arr));
+      document.getElementById("output").value = arr
+        .map((a) => a.join("."))
+        .join(".");
     });
   </script>
 </html>

@@ -8,16 +8,60 @@
   <body></body>
   <script src="index.js"></script>
   <script>
-    const game = setUpGame(document);
+    const game = setUpGame(window);
     game.addSprite(
-      "x",
-      "W1siIiwiIiwiIiwiIiwiIiwiIiwiIiwiIl0sWyIiLCIjMDAwMDAwIiwiIzAwZWQxZiIsIiIsIiIsIiIsIiMwMDAwMDAiLCIiXSxbIiIsIiIsIiIsIiIsIiMwMDAwMDAiLCIjMDAwMDAwIiwiIiwiIl0sWyIiLCIiLCIiLCIjMDAwMDAwIiwiIiwiIiwiIiwiIl0sWyIiLCIiLCIiLCIiLCIjMDAwMDAwIiwiIiwiIiwiIl0sWyIiLCIjMDAwMDAwIiwiIzAwZWQxZiIsIiIsIiIsIiMwMDAwMDAiLCIiLCIiXSxbIiIsIiIsIiIsIiIsIiIsIiIsIiMwMDAwMDAiLCIiXSxbIiIsIiIsIiIsIiIsIiIsIiIsIiIsIiJdXQ=="
+      "shipright",
+      "#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00..#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00....#ce2a00.#041ece.#041ece.#ce2a00.....#ce2a00.#041ece.#041ece.#ce2a00.....#ce2a00.#ce2a00.#ce2a00.#ce2a00......#ce2a00.#ce2a00.......#ce2a00.#ce2a00..."
     );
+    game.addSprite(
+      "shipup",
+      "......#ce2a00.#ce2a00......#ce2a00.#ce2a00.#ce2a00...#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#041ece.#041ece.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#041ece.#041ece.#ce2a00.#ce2a00.#ce2a00...#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00......#ce2a00.#ce2a00.#ce2a00.......#ce2a00.#ce2a00"
+    );
+    game.addSprite(
+      "shipleft",
+      "...#ce2a00.#ce2a00.......#ce2a00.#ce2a00......#ce2a00.#ce2a00.#ce2a00.#ce2a00.....#ce2a00.#041ece.#041ece.#ce2a00.....#ce2a00.#041ece.#041ece.#ce2a00....#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00..#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00"
+    );
+    game.addSprite(
+      "shipdown",
+      "#ce2a00.#ce2a00.......#ce2a00.#ce2a00.#ce2a00......#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00...#ce2a00.#ce2a00.#ce2a00.#041ece.#041ece.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#041ece.#041ece.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00...#ce2a00.#ce2a00.#ce2a00......#ce2a00.#ce2a00......"
+    );
+    game.addSprite(
+      "end",
+      "........................................#70706d.#70706d.#70706d.#70706d.#70706d.#70706d.#70706d.#70706d.#fefff8.#050505.#fefff8.#050505.#fefff8.#000000.#fefff8.#050505.#050505.#fefff8.#050505.#fefff8.#050505.#fefff8.#050505.#fefff8"
+    );
+
+    let x = 0;
+    let y = 0;
+    let direction = "up";
+
+    game.update = () => {
+      if (game.key("right")) {
+        direction = "right";
+        x++;
+      }
+      if (game.key("left")) {
+        direction = "left";
+        x--;
+      }
+      if (game.key("up")) {
+        direction = "up";
+        y--;
+      }
+      if (game.key("down")) {
+        direction = "down";
+        y++;
+      }
+    };
+
     game.draw = () => {
-      game.sprite("x", game.time / 10, 0);
-      game.sprite("x", game.time / 9, 8);
-      game.sprite("x", game.time / 8, 16);
-      game.sprite("x", game.time / 7, 24);
+      game.sprite("end", 92, 0);
+      game.sprite("end", 92, 8);
+      game.sprite("end", 92, 16);
+      game.sprite("end", 92, 24);
+      game.sprite("ship" + direction, x, y);
+      game.sprite("shipright", game.time / 9, 8);
+      game.sprite("shipright", game.time / 8, 16);
+      game.sprite("shipright", game.time / 7, 24);
     };
   </script>
 </html>
