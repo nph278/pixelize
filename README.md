@@ -1,6 +1,5 @@
 # pixelize
 
-aa
 A pixely 2d game engine
 
 ## Tutorial
