@@ -14,6 +14,7 @@ class Game {
     this.draw = () => {};
     this.time = 0;
     this.keys = {};
+    this.playing = false;
     setInterval(() => {
       this.update();
       this.ctx.clearRect(0, 0, this.size, this.size);
@@ -52,8 +53,11 @@ class Game {
     );
   }
   sound(file) {
-    const audio = new Audio(`${file}.mp3`);
-    audio.play();
+    if (!this.playing) {
+      const audio = new Audio(`${file}.mp3`);
+      this.playing = true;
+      audio.play().then(() => (this.playing = false));
+    }
   }
 }
 
