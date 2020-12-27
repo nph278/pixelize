@@ -22,7 +22,7 @@ And then initializing you game with:
 </script>
 ```
 
-The game updatees by calling `game.update`, then clears the screen, then `game.draw`.
+The game updates by calling `game.update`, then clears the screen, then `game.draw`.
 
 ### Sprites
 
