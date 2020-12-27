@@ -88,6 +88,7 @@ const setUpGame = (window) => {
   window.document.body.style.margin = 0;
   window.document.body.style.overflow = "hidden";
   window.document.body.style.background = "black";
+  window.document.body.style.userSelect = "none";
   window.document.body.style.height = "100vh";
   const btnStyle =
     "color:white; background-color: gray; font-family: arial; font-size: 3rem; display: block; margin: 5px; cursor: pointer; flex-grow: 1; user-select: none; text-align: center";
@@ -118,6 +119,8 @@ const setUpGame = (window) => {
           <div style="${nullStyle}">&nbsp;</div>
         </div>
       </div>
+      <div style="height: 200px;width: 100%;">
+      </div>
     `
     }
     </div>
@@ -132,12 +135,20 @@ const setUpGame = (window) => {
     keyArr.forEach((key) => {
       window.document
         .querySelector("#btn-" + key)
-        .addEventListener("touchstart", () => {
+        .addEventListener("touchstart", (e) => {
+          e.preventDefault();
           game.keys[key] = true;
         });
       window.document
         .querySelector("#btn-" + key)
-        .addEventListener("touchend", () => {
+        .addEventListener("touchend", (e) => {
+          e.preventDefault();
+          game.keys[key] = false;
+        });
+      window.document
+        .querySelector("#btn-" + key)
+        .addEventListener("touchcancel", (e) => {
+          e.preventDefault();
           game.keys[key] = false;
         });
     });
