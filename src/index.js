@@ -139,12 +139,12 @@ const setUpGame = (window) => {
     keyArr.forEach((key) => {
       window.document
         .querySelector("#btn-" + key)
-        .addEventListener("mousedown", () => {
+        .addEventListener("touchstart", () => {
           game.keys[key] = true;
         });
       window.document
         .querySelector("#btn-" + key)
-        .addEventListener("mouseup", () => {
+        .addEventListener("touchend", () => {
           game.keys[key] = false;
         });
     });
