@@ -1,12 +1,18 @@
 {
-  "name": "pixelize",
+  "name": "pixelize-engine",
   "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A pixely 2d game engine",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "NPH",
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "files": [
+    "src/"
+  ]
 }
