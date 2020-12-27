@@ -14,12 +14,15 @@ class Game {
     this.draw = () => {};
     this.time = 0;
     this.keys = {};
+    this.running = false;
     this.playing = false;
     setInterval(() => {
-      this.update();
-      this.ctx.clearRect(0, 0, this.size, this.size);
-      this.draw();
-      this.time++;
+      if (this.running) {
+        this.update();
+        this.ctx.clearRect(0, 0, this.size, this.size);
+        this.draw();
+        this.time++;
+      }
     }, 33);
   }
   key(key) {
@@ -71,8 +74,25 @@ const setUpGame = (window) => {
   window.document.body.style.justifyContent = "center";
   window.document.body.style.alignItems = "center";
   window.document.body.innerHTML = `
-    <canvas width="${size}"  height="${size}" id="canvas" style="border:white solid 2px" />
+    <canvas width="${size}"  height="${size}" id="canvas" style="border:white solid 2px"></canvas>
+    <div id="overlay">Play</div>
   `;
+  window.document.querySelector("#overlay").style.background = "black";
+  window.document.querySelector("#overlay").style.opacity = "50%";
+  window.document.querySelector("#overlay").style.width = "100%";
+  window.document.querySelector("#overlay").style.height = "100%";
+  window.document.querySelector("#overlay").style.position = "absolute";
+  window.document.querySelector("#overlay").style.display = "flex";
+  window.document.querySelector("#overlay").style.color = "gray";
+  window.document.querySelector("#overlay").style.justifyContent = "center";
+  window.document.querySelector("#overlay").style.alignItems = "center";
+  window.document.querySelector("#overlay").style.fontFamily = "courier";
+  window.document.querySelector("#overlay").style.fontSize = "3rem";
+  window.document.querySelector("#overlay").style.cursor = "pointer";
+  window.document.querySelector("#overlay").addEventListener("click", (e) => {
+    game.running = true;
+    e.target.style.display = "none";
+  });
   const ctx = window.document.getElementById("canvas").getContext("2d");
   const game = new Game(ctx, size);
   window.addEventListener("keydown", ({ key }) => {
