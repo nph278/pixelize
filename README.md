@@ -2,7 +2,7 @@
 
 A pixely 2d game engine
 
-## Please submit a pull request if you can make the mobile version look good!
+## Please submit a pull request if you can make the mobile version look good
 
 ## Tutorial
 
