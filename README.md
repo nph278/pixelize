@@ -2,25 +2,11 @@
 
 A pixely 2d game engine
 
-`npm install pixelize-engine`
-
 ## Tutorial
 
-You can install pixelize with `npm install pixelize-engine`.
-You can start using it with:
+You can create a new game with `npx degit nph278/pixelize-template game-name`, then running `npm i` in that directory.
 
-```html
-<script src="node_modules/pixelize-engine/src/index.js"></script>
-```
-
-And then initializing you game with:
-
-```html
-<script>
-  const game = setUpGame(window);
-  // Code goes here...
-</script>
-```
+## Updating
 
 The game updates by calling `game.update`, then clears the screen, then `game.draw`.
 
