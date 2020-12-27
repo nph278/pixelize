@@ -88,24 +88,25 @@ const setUpGame = (window) => {
     (mobile ? 200 : 0);
   window.document.body.style.margin = 0;
   window.document.body.style.overflow = "hidden";
-  window.document.body.style.display = "flex";
   window.document.body.style.background = "black";
-  window.document.body.style.justifyContent = "center";
-  window.document.body.style.alignItems = "center";
+  window.document.body.style.height = "100vh";
   const btnStyle =
     "color:white; background-color: gray; padding: 10px; font-family: courier; font-size: 3rem; display: block; margin: 5px; cursor: pointer; flex-grow: 1; user-select: none";
   const nullStyle =
     "padding:10px;font-size: 3rem;font-family:courier; margin:5px;flex-grow:1;user-select:none;";
   window.document.body.innerHTML = `
-    ${mobile && '<div style="display: flex; flex-direction: column">'}
-
-    <canvas width="${size}"  height="${size}" id="canvas" style="border:white solid 2px; display:block"></canvas>
-    <div>
+    <div style="display:flex; justify-content:center;width: 100%;  ${
+      !mobile && "height:100%"
+    }">
+    
+    <canvas width="${size}"  height="${size}" id="canvas" style="box-sizing: border-box;border:white solid 2px; display:block"></canvas>
+    
+    </div>
 
     ${
       mobile &&
       `
-      <div style="">
+      <div style="align-self: end" style="height: 100%">
       
         <div style="display:flex">
       <div id="btn-" style="${nullStyle}">&nbsp;</div>
@@ -125,8 +126,6 @@ const setUpGame = (window) => {
       </div></div>
     `
     }
-    ${mobile && "</div>"}
-    ${mobile && "</div>"}
     </div>
   `;
   window.document.querySelector("canvas").style.cursor = "pointer";
