@@ -1,5 +1,6 @@
 let x = 0;
 let y = 0;
+let score = 0;
 let boxes = [];
 let bullets = [];
 for (let i = 0; i < 5; i++) {
@@ -77,6 +78,7 @@ game.update = () => {
       )
     ) {
       game.sound("sounds/no");
+      score++;
       boxes.splice(i, 1);
       boxes.push([
         Math.random() * 92,
@@ -100,4 +102,5 @@ game.draw = () => {
       y2
     );
   });
+  game.text(score.toString(), 10, 10);
 };
