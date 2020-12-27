@@ -2,4 +2,4 @@
 
 A pixely 2d game engine
 
-`npm install pixely-engine`
+`npm install pixelize-engine`
