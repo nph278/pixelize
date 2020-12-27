@@ -84,46 +84,40 @@ const setUpGame = (window) => {
       mobile = true;
   })(navigator.userAgent || navigator.vendor || window.opera);
   let size =
-    Math.floor(Math.min(window.innerHeight, window.innerWidth) / 100) * 100 -
-    (mobile ? 200 : 0);
+    Math.floor(Math.min(window.innerHeight, window.innerWidth) / 100) * 100;
   window.document.body.style.margin = 0;
   window.document.body.style.overflow = "hidden";
   window.document.body.style.background = "black";
   window.document.body.style.height = "100vh";
   const btnStyle =
-    "color:white; background-color: gray; padding: 10px; font-family: courier; font-size: 3rem; display: block; margin: 5px; cursor: pointer; flex-grow: 1; user-select: none";
+    "color:white; background-color: gray; font-family: arial; font-size: 3rem; display: block; margin: 5px; cursor: pointer; flex-grow: 1; user-select: none; text-align: center";
   const nullStyle =
-    "padding:10px;font-size: 3rem;font-family:courier; margin:5px;flex-grow:1;user-select:none;";
+    "padding:5px;font-size: 3rem;font-family:arial; margin:5px;flex-grow:1;user-select:none; text-align: center";
   window.document.body.innerHTML = `
-    <div style="display:flex; justify-content:center;width: 100%;  ${
-      !mobile && "height:100%"
-    }">
-    
-    <canvas width="${size}"  height="${size}" id="canvas" style="box-sizing: border-box;border:white solid 2px; display:block"></canvas>
-    
-    </div>
+    <div style="display:flex; width:100%; height:100%; flex-direction:column">
+      <div style="display:flex; justify-content:center;width: 100%; height:100%">
+        <canvas width="${size}"  height="${size}" id="canvas" style="box-sizing: border-box;border:white solid  2px; display:block; height:100%"></canvas>
+      </div>
 
     ${
       mobile &&
       `
-      <div style="align-self: end" style="height: 100%">
-      
+      <div style="height: 200px;width: 100%; display:flex; flex-direction: column">
         <div style="display:flex">
-      <div id="btn-" style="${nullStyle}">&nbsp;</div>
-      <div id="btn-ArrowUp" style="${btnStyle}">^</div>
-      <div id="btn-" style="${nullStyle}">&nbsp;</div>
-      <div id="btn-" style="${nullStyle}">&nbsp;</div>
-      <div id="btn-z" style="${btnStyle}">Z</div>
+          <div style="${nullStyle}">&nbsp;</div>
+          <div id="btn-ArrowUp" style="${btnStyle}">^</div>
+          <div style="${nullStyle}">&nbsp;</div>
+          <div style="${nullStyle}">&nbsp;</div>
+          <div id="btn-z" style="${btnStyle}">Z</div>
+        </div>
+        <div style="display:flex">
+          <div id="btn-ArrowLeft" style="${btnStyle}">&lt;</div>
+          <div id="btn-ArrowDown" style="${btnStyle}">v</div>
+          <div id="btn-ArrowRight" style="${btnStyle}">&gt;</div>
+          <div id="btn-x" style="${btnStyle}">X</div>
+          <div style="${nullStyle}">&nbsp;</div>
+        </div>
       </div>
-      
-      
-        <div style="display:flex">
-      <div id="btn-ArrowLeft" style="${btnStyle}">&lt;</div>
-      <div id="btn-ArrowDown" style="${btnStyle}">v</div>
-      <div id="btn-ArrowRight" style="${btnStyle}">&gt;</div>
-      <div id="btn-x" style="${btnStyle}">X</div>
-      <div id="btn-" style="${nullStyle}">&nbsp;</div>
-      </div></div>
     `
     }
     </div>
@@ -159,8 +153,7 @@ const setUpGame = (window) => {
   });
   window.addEventListener("resize", () => {
     size =
-      Math.floor(Math.min(window.innerHeight, window.innerWidth) / 100) * 100 -
-      (mobile ? 200 : 0);
+      Math.floor(Math.min(window.innerHeight, window.innerWidth) / 100) * 100;
     window.document.querySelector("canvas").width = size;
     window.document.querySelector("canvas").height = size;
     game.ctx.font = `${size / 20}px courier`;
