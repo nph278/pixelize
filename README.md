@@ -21,3 +21,7 @@ You can play a sound with `game.sound("filename")` where `filename` is the path 
 ## Key presses
 
 You can check if a key is pressed with `game.key("key name")`. Key name could be up, down, left, or right for arrow keys, or a letter, number or `space`.
+
+## Text
+
+You can print text to the screen with `game.text("text", x, y, "color")`. The default color is white.
