@@ -8,6 +8,7 @@ const keymap = {
 class Game {
   constructor(ctx, size) {
     this.ctx = ctx;
+    this.ctx.font = `${size / 20}px courier`;
     this.size = size;
     this.sprites = {};
     this.update = () => {};
@@ -62,6 +63,11 @@ class Game {
       audio.play().then(() => (this.playing = false));
     }
   }
+  text(text, x, y, color) {
+    color = color || "white";
+    this.ctx.fillStyle = color;
+    this.ctx.fillText(text, (x * this.size) / 100, (y * this.size) / 100);
+  }
 }
 
 const setUpGame = (window) => {
@@ -106,6 +112,7 @@ const setUpGame = (window) => {
       Math.floor(Math.min(window.innerHeight, window.innerWidth) / 100) * 100;
     window.document.querySelector("canvas").width = size;
     window.document.querySelector("canvas").height = size;
+    game.ctx.font = `${size / 20}px courier`;
     game.size = size;
   });
   return game;
