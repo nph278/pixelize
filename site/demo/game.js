@@ -102,5 +102,5 @@ game.draw = () => {
       y2
     );
   });
-  game.text(score.toString(), 10, 10);
+  game.text(score.toString(), x, y);
 };
