@@ -84,7 +84,8 @@ const setUpGame = (window) => {
       mobile = true;
   })(navigator.userAgent || navigator.vendor || window.opera);
   let size =
-    Math.floor(Math.min(window.innerHeight, window.innerWidth) / 100) * 100;
+    Math.floor(Math.min(window.innerHeight, window.innerWidth) / 100) * 100 -
+    (mobile ? 200 : 0);
   window.document.body.style.margin = 0;
   window.document.body.style.overflow = "hidden";
   window.document.body.style.display = "flex";
@@ -92,7 +93,9 @@ const setUpGame = (window) => {
   window.document.body.style.justifyContent = "center";
   window.document.body.style.alignItems = "center";
   const btnStyle =
-    "color:white; background-color: gray; padding: 10px; font-family: courier; font-size: 3rem; display: block; margin: 5px; cursor: pointer; flex-grow: 1";
+    "color:white; background-color: gray; padding: 10px; font-family: courier; font-size: 3rem; display: block; margin: 5px; cursor: pointer; flex-grow: 1; user-select: none";
+  const nullStyle =
+    "padding:10px;font-size: 3rem;font-family:courier; margin:5px;flex-grow:1;user-select:none;";
   window.document.body.innerHTML = `
     ${mobile && '<div style="display: flex; flex-direction: column">'}
 
@@ -102,13 +105,24 @@ const setUpGame = (window) => {
     ${
       mobile &&
       `
+      <div style="">
+      
         <div style="display:flex">
-      <div id="btn--up" style="${btnStyle}">^</div>
-      <div id="btn--down" style="${btnStyle}">v</div>
-      <div id="btn--left" style="${btnStyle}">&lt;</div>
-      <div id="btn--right" style="${btnStyle}">&gt;</div>
-      <div id="btn--z" style="${btnStyle}">Z</div>
-      <div id="btn--x" style="${btnStyle}">X</div></div>
+      <div id="btn-" style="${nullStyle}">&nbsp;</div>
+      <div id="btn-ArrowUp" style="${btnStyle}">^</div>
+      <div id="btn-" style="${nullStyle}">&nbsp;</div>
+      <div id="btn-" style="${nullStyle}">&nbsp;</div>
+      <div id="btn-z" style="${btnStyle}">Z</div>
+      </div>
+      
+      
+        <div style="display:flex">
+      <div id="btn-ArrowLeft" style="${btnStyle}">&lt;</div>
+      <div id="btn-ArrowDown" style="${btnStyle}">v</div>
+      <div id="btn-ArrowRight" style="${btnStyle}">&gt;</div>
+      <div id="btn-x" style="${btnStyle}">X</div>
+      <div id="btn-" style="${nullStyle}">&nbsp;</div>
+      </div></div>
     `
     }
     ${mobile && "</div>"}
@@ -120,9 +134,24 @@ const setUpGame = (window) => {
     game.running = true;
     window.document.querySelector("canvas").style.cursor = "auto";
   });
+  const keyArr = ["ArrowUp", "ArrowDown", "ArrowRight", "ArrowLeft", "z", "x"];
+  mobile &&
+    keyArr.forEach((key) => {
+      window.document
+        .querySelector("#btn-" + key)
+        .addEventListener("mousedown", () => {
+          game.keys[key] = true;
+        });
+      window.document
+        .querySelector("#btn-" + key)
+        .addEventListener("mouseup", () => {
+          game.keys[key] = false;
+        });
+    });
 
   const ctx = window.document.getElementById("canvas").getContext("2d");
   const game = new Game(ctx, size);
+  game.text("Start", 43, 50);
   window.addEventListener("keydown", ({ key }) => {
     game.keys[key] = true;
   });
@@ -131,11 +160,13 @@ const setUpGame = (window) => {
   });
   window.addEventListener("resize", () => {
     size =
-      Math.floor(Math.min(window.innerHeight, window.innerWidth) / 100) * 100;
+      Math.floor(Math.min(window.innerHeight, window.innerWidth) / 100) * 100 -
+      (mobile ? 200 : 0);
     window.document.querySelector("canvas").width = size;
     window.document.querySelector("canvas").height = size;
     game.ctx.font = `${size / 20}px courier`;
     game.size = size;
+    game.text("Start", 43, 50);
   });
   return game;
 };
