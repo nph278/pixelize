@@ -2,6 +2,8 @@
 
 A pixely 2d game engine
 
+## Please submit a pull request if you can make the mobile version look good!
+
 ## Tutorial
 
 You can create a new game with `npx degit nph278/pixelize-template game-name`, then running `npm i` in that directory.
