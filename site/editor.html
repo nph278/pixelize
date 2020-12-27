@@ -3,14 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Editor</title>
   </head>
   <body>
-    <canvas width="320" height="320" style="border: 2px solid black"></canvas
-    ><br />
-    <input type="color" id="color" />
-    <textarea id="output"></textarea>
+    <a href=".">Home</a><br />
+    <div id="canvas-wrap">
+      <canvas width="320" height="320" style="border: 2px solid black"></canvas>
+      <textarea id="output" onclick="copy()" readonly></textarea>
+    </div>
   </body>
+  <input type="color" id="color" />
   <script>
     let arr = [];
     for (let i = 0; i < 8; i++) {
@@ -20,15 +23,37 @@
       }
       arr.push(z);
     }
+    let down = false;
     const ctx = document.querySelector("canvas").getContext("2d");
-    document.querySelector("canvas").addEventListener("click", ({ x, y }) => {
-      const col = document.querySelector("#color").value;
-      arr[Math.floor(x / 40)][Math.floor(y / 40)] = col;
-      ctx.fillStyle = col;
-      ctx.fillRect(Math.floor(x / 40) * 40, Math.floor(y / 40) * 40, 40, 40);
-      document.getElementById("output").value = arr
-        .map((a) => a.join("."))
-        .join(".");
-    });
+    document
+      .querySelector("canvas")
+      .addEventListener("mousedown", () => (down = true));
+    document
+      .querySelector("canvas")
+      .addEventListener("mouseup", () => (down = false));
+    document
+      .querySelector("canvas")
+      .addEventListener("mousemove", ({ x, y }) => {
+        if (down) {
+          const col = document.querySelector("#color").value;
+          arr[Math.floor(x / 40)][Math.floor(y / 40) - 1] = col;
+          ctx.fillStyle = col;
+          ctx.fillRect(
+            Math.floor(x / 40) * 40,
+            (Math.floor(y / 40) - 1) * 40,
+            40,
+            40
+          );
+          document.getElementById("output").value = arr
+            .map((a) => a.join("."))
+            .join(".");
+        }
+      });
+    const copy = () => {
+      const copyText = document.getElementById("output");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+    };
   </script>
 </html>

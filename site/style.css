@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
+:root {
+  --bg: rgb(46, 46, 71);
+  --bg2: rgb(58, 58, 78);
+  --fg: rgb(204, 204, 204);
+}
+
+html {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "Ubuntu Mono", monospace;
+}
+
+a {
+  font-size: 1.5em;
+}
+
+nav {
+  display: flex;
+}
+
+.header {
+  font-size: 30px;
+  padding: 15px;
+  display: block;
+}
+
+section {
+  background: var(--bg2);
+  padding: 10px;
+}
+
+.seperator {
+  background-color: var(--bg);
+  height: 3px;
+}
+
+strong {
+  color: rgb(255, 255, 255);
+}
+
+code {
+  font-family: inherit;
+  background: grey;
+  color: black;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+a {
+  color: darkgray;
+  text-decoration: none;
+  position: relative;
+}
+
+a::after {
+  display: inline-block;
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 2px;
+  background: var(--fg);
+  transform: scaleX(0);
+  transition: transform 150ms ease-in;
+  transform-origin: left;
+}
+
+a:hover::after,
+a:focus::after {
+  transform: scaleX(1);
+}
+
+a:active {
+  color: white;
+}
+
+ul {
+  list-style: none;
+}
+
+#canvas-wrap {
+  display: flex;
+}
+
+#canvas-wrap > :not(canvas) {
+  flex-grow: 1;
+}
+
+canvas {
+  background: black;
+}
+
+input[type="color"] {
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  height: 5rem;
+}
+
+textarea#output {
+  user-select: none;
+  cursor: pointer;
+  background-color: gray;
+  resize: none;
+}
