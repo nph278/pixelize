@@ -173,3 +173,5 @@ const setUpGame = (window) => {
   });
   return game;
 };
+
+export default setUpGame;
