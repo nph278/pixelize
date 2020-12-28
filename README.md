@@ -8,6 +8,8 @@ A pixely 2d game engine
 
 You can create a new game with `npx degit nph278/pixelize-template game-name`, then running `npm i` in that directory.
 
+You can start developing with "npm run dev", and you can create a production build with "npm run build".
+
 ## Updating
 
 The game updates by calling `game.update`, then clears the screen, then `game.draw`.
