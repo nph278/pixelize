@@ -36,7 +36,7 @@ class Game {
       sprites.map((sprite) => this.sprites[sprite]),
       time || 1
     );
-    return animations.length - 1;
+    return this.animations.length - 1;
   }
   animate(id) {
     return this.animations[id][0][
