@@ -5,6 +5,7 @@ const keymap = {
   right: "ArrowRight",
   space: " ",
 };
+
 class Game {
   constructor(ctx, size) {
     this.ctx = ctx;
@@ -17,6 +18,7 @@ class Game {
     this.keys = {};
     this.running = false;
     this.playing = false;
+    this.animations = [];
     setInterval(() => {
       if (this.running) {
         this.update();
@@ -28,6 +30,19 @@ class Game {
   }
   key(key) {
     return !!this.keys[key in keymap ? keymap[key] : key];
+  }
+  animation(sprites, time) {
+    this.animations.push(
+      sprites.map((sprite) => this.sprites[sprite]),
+      time || 1
+    );
+    return animations.length - 1;
+  }
+  animate(id) {
+    return this.animations[id][0][
+      Math.floor(this.time / this.animations[id][1]) %
+        this.animations[id][0].length
+    ];
   }
   addSprite(name, sprite) {
     let ready = 0;
