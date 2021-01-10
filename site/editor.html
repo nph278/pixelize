@@ -13,6 +13,10 @@
       flex-grow: 1;
     }
 
+    .wrap:last-child {
+      height: 50px;
+    }
+
     canvas {
       background: black;
       cursor: crosshair;
@@ -44,18 +48,30 @@
   </head>
   <body>
     <a href=".">Home</a><br />
-    <div id="canvas-wrap" class="wrap">
-      <canvas width="320" height="320" style="border: 2px solid black"></canvas>
-      <textarea id="output" onclick="copy()" readonly></textarea>
+    <div class="wraps">
+      <div id="canvas-wrap" class="wrap">
+        <canvas
+          width="320"
+          height="320"
+          style="border: 2px solid black"
+        ></canvas>
+        <textarea id="output" onclick="copy()" readonly></textarea>
+      </div>
+      <div class="wrap">
+        <input type="color" id="color" />
+        <button onclick="col = ''">Eraser</button>
+        <button
+          onclick="arr = JSON.parse(JSON.stringify(originalarr));update()"
+        >
+          Clear
+        </button>
+      </div>
+      <div class="wrap">
+        <button onclick="undo()">Undo</button>
+        <button onclick="redo()">Redo</button>
+      </div>
     </div>
   </body>
-  <div class="wrap">
-    <input type="color" id="color" />
-    <button onclick="col = ''">Eraser</button>
-    <button onclick="arr = JSON.parse(JSON.stringify(originalarr));update()">
-      Clear
-    </button>
-  </div>
   <script>
     let col = "#ffffff";
     document.querySelector("#color").addEventListener("change", (e) => {
