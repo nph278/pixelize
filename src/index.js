@@ -90,10 +90,16 @@ class Game {
   }
 }
 
-const setUpGame = (window) => {
-  if (!window) {
-    throw new ReferenceError("No window passed");
-  }
+const defaultTo = (obj, property, defaultValue) => {
+  obj[property] = obj[property] === undefined ? defaultValue : obj[property];
+};
+
+const setUpGame = (window, config) => {
+  config = config || {};
+  defaultTo(config, "excludeButtons", []); // Buttons to exclude on mobile version
+
+  /* This checks for mobile browsers */
+
   let mobile = false;
   (function (a) {
     if (
@@ -113,10 +119,11 @@ const setUpGame = (window) => {
   window.document.body.style.background = "black";
   window.document.body.style.userSelect = "none";
   window.document.body.style.height = "100vh";
-  const btnStyle =
-    "color:white; background-color: gray; font-family: arial; font-size: 3rem; display: block; margin: 5px; cursor: pointer; flex-grow: 1; user-select: none; text-align: center";
   const nullStyle =
     "padding:5px;font-size: 3rem;font-family:arial; margin:5px;flex-grow:1;user-select:none; text-align: center";
+  const nullDiv = `<div style="${nullStyle}">&nbsp;</div>`;
+  const btnStyle =
+    "color:white; background-color: gray; font-family: arial; font-size: 3rem; display: block; margin: 5px; cursor: pointer; flex-grow: 1; user-select: none; text-align: center";
   window.document.body.innerHTML = `
     <div style="display:flex; width:100%; height:100%; flex-direction:column">
       <div style="display:flex; justify-content:center;width: 100%; height:100%">
@@ -128,18 +135,42 @@ const setUpGame = (window) => {
       `
       <div style="height: 200px;width: 100%; display:flex; flex-direction: column">
         <div style="display:flex">
-          <div style="${nullStyle}">&nbsp;</div>
-          <div id="btn-ArrowUp" style="${btnStyle}">^</div>
-          <div style="${nullStyle}">&nbsp;</div>
-          <div style="${nullStyle}">&nbsp;</div>
-          <div id="btn-z" style="${btnStyle}">Z</div>
+          ${nullDiv}
+          ${
+            !config.excludeButtons.includes("up")
+              ? `<div id="btn-ArrowUp" style="${btnStyle}">^</div>`
+              : nullDiv
+          }
+          ${nullDiv}
+          ${nullDiv}
+          ${
+            !config.excludeButtons.includes("z")
+              ? `<div id="btn-z" style="${btnStyle}">Z</div>`
+              : nullDiv
+          }
         </div>
         <div style="display:flex">
-          <div id="btn-ArrowLeft" style="${btnStyle}">&lt;</div>
-          <div id="btn-ArrowDown" style="${btnStyle}">v</div>
-          <div id="btn-ArrowRight" style="${btnStyle}">&gt;</div>
-          <div id="btn-x" style="${btnStyle}">X</div>
-          <div style="${nullStyle}">&nbsp;</div>
+          ${
+            !config.excludeButtons.includes("left")
+              ? `<div id="btn-ArrowLeft" style="${btnStyle}">&lt;</div>`
+              : nullDiv
+          }
+          ${
+            !config.excludeButtons.includes("down")
+              ? `<div id="btn-ArrowDown" style="${btnStyle}">v</div>`
+              : nullDiv
+          }
+          ${
+            !config.excludeButtons.includes("right")
+              ? `<div id="btn-ArrowRight" style="${btnStyle}">&gt;</div>`
+              : nullDiv
+          }
+          ${
+            !config.excludeButtons.includes("x")
+              ? `<div id="btn-x" style="${btnStyle}">X</div>`
+              : nullDiv
+          }
+          ${nullDiv}
         </div>
       </div>
       <div style="height: 200px;width: 100%;">
@@ -154,28 +185,37 @@ const setUpGame = (window) => {
     window.document.querySelector("canvas").style.cursor = "auto";
   });
   const keyArr = ["ArrowUp", "ArrowDown", "ArrowRight", "ArrowLeft", "z", "x"];
+  const shortKey = {
+    ArrowUp: "up",
+    ArrowDown: "down",
+    ArrowRight: "right",
+    ArrowLeft: "left",
+    x: "x",
+    y: "y",
+  };
   mobile &&
     keyArr.forEach((key) => {
-      window.document
-        .querySelector("#btn-" + key)
-        .addEventListener("touchstart", (e) => {
-          e.preventDefault();
-          game.keys[key] = true;
-        });
-      window.document
-        .querySelector("#btn-" + key)
-        .addEventListener("touchend", (e) => {
-          e.preventDefault();
-          game.keys[key] = false;
-        });
-      window.document
-        .querySelector("#btn-" + key)
-        .addEventListener("touchcancel", (e) => {
-          e.preventDefault();
-          game.keys[key] = false;
-        });
+      if (!config.excludeButtons.includes(shortKey[key])) {
+        window.document
+          .querySelector("#btn-" + key)
+          .addEventListener("touchstart", (e) => {
+            e.preventDefault();
+            game.keys[key] = true;
+          });
+        window.document
+          .querySelector("#btn-" + key)
+          .addEventListener("touchend", (e) => {
+            e.preventDefault();
+            game.keys[key] = false;
+          });
+        window.document
+          .querySelector("#btn-" + key)
+          .addEventListener("touchcancel", (e) => {
+            e.preventDefault();
+            game.keys[key] = false;
+          });
+      }
     });
-
   const ctx = window.document.getElementById("canvas").getContext("2d");
   const game = new Game(ctx, size);
   game.text("Start", 43, 50);
