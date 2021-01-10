@@ -29,3 +29,9 @@ You can check if a key is pressed with `game.key("key name")`. Key name could be
 ## Text
 
 You can print text to the screen with `game.text("text", x, y, "color")`. The default color is white.
+
+## Animations
+
+You can create a animation with `const animationName = game.animation(["sprite1", "sprite2"...], speed)` outside of `game.draw`. Speed defaults to one.
+
+You can print that animation with `game.sprite(game.animate(animationName), x, y)`.
