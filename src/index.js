@@ -32,10 +32,7 @@ class Game {
     return !!this.keys[key in keymap ? keymap[key] : key];
   }
   animation(sprites, time) {
-    this.animations.push(
-      sprites.map((sprite) => this.sprites[sprite]),
-      time || 1
-    );
+    this.animations.push(sprites, time || 1);
     return this.animations.length - 1;
   }
   animate(id) {
