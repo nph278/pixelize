@@ -54,25 +54,33 @@ class Game {
   }
   sprite(name, x, y) {
     const sprite = this.sprites[name];
-    sprite.forEach((row, x1) =>
-      row.forEach((color, y1) => {
-        if (color !== "") {
-          this.ctx.fillStyle = color;
-          this.ctx.fillRect(
-            (Math.floor(x + x1) * this.size) / 100,
-            (Math.floor(y + y1) * this.size) / 100,
-            this.size / 100,
-            this.size / 100
-          );
-        }
-      })
-    );
+    if (sprite) {
+      sprite.forEach((row, x1) =>
+        row.forEach((color, y1) => {
+          if (color !== "") {
+            this.ctx.fillStyle = color;
+            this.ctx.fillRect(
+              (Math.floor(x + x1) * this.size) / 100,
+              (Math.floor(y + y1) * this.size) / 100,
+              this.size / 100,
+              this.size / 100
+            );
+          }
+        })
+      );
+    } else {
+      throw new ReferenceError(`No sprite named "${name}"`);
+    }
   }
   sound(file) {
     if (!this.playing) {
       const audio = new Audio(`${file}.mp3`);
       this.playing = true;
-      audio.play().then(() => (this.playing = false));
+      try {
+        audio.play().then(() => (this.playing = false));
+      } catch {
+        throw new URIError(`No file named "${file}.mp3"`);
+      }
     }
   }
   text(text, x, y, color) {
@@ -83,6 +91,9 @@ class Game {
 }
 
 const setUpGame = (window) => {
+  if (!window) {
+    throw new ReferenceError("No window passed");
+  }
   let mobile = false;
   (function (a) {
     if (
