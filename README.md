@@ -1,6 +1,6 @@
 # pixelize
 
-A pixely 2d game engine
+A pixely 2d game framework
 
 ## Please submit a pull request if you can make the mobile version look good
 
