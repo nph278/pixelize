@@ -75,33 +75,3 @@ a:focus::after {
 a:active {
   color: white;
 }
-
-ul {
-  list-style: none;
-}
-
-#canvas-wrap {
-  display: flex;
-}
-
-#canvas-wrap > :not(canvas) {
-  flex-grow: 1;
-}
-
-canvas {
-  background: black;
-}
-
-input[type="color"] {
-  width: 100%;
-  padding: 0;
-  background: transparent;
-  height: 5rem;
-}
-
-textarea#output {
-  user-select: none;
-  cursor: pointer;
-  background-color: gray;
-  resize: none;
-}

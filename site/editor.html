@@ -1,5 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+  <style>
+    ul {
+      list-style: none;
+    }
+
+    .wrap {
+      display: flex;
+    }
+
+    .wrap > :not(canvas) {
+      flex-grow: 1;
+    }
+
+    canvas {
+      background: black;
+      cursor: crosshair;
+    }
+
+    input[type="color"] {
+      padding: 0;
+      background: transparent;
+      height: 5rem;
+    }
+
+    textarea#output {
+      user-select: none;
+      cursor: pointer;
+      background-color: gray;
+      resize: none;
+    }
+
+    button {
+      background-color: black;
+      color: white;
+    }
+  </style>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,22 +44,65 @@
   </head>
   <body>
     <a href=".">Home</a><br />
-    <div id="canvas-wrap">
+    <div id="canvas-wrap" class="wrap">
       <canvas width="320" height="320" style="border: 2px solid black"></canvas>
       <textarea id="output" onclick="copy()" readonly></textarea>
     </div>
   </body>
-  <input type="color" id="color" />
+  <div class="wrap">
+    <input type="color" id="color" />
+    <button onclick="col = ''">Eraser</button>
+    <button onclick="arr = JSON.parse(JSON.stringify(originalarr));update()">
+      Clear
+    </button>
+  </div>
   <script>
-    let arr = [];
+    let col = "#ffffff";
+    document.querySelector("#color").addEventListener("change", (e) => {
+      col = e.target.value;
+    });
+    let undoarr = [];
+    let redoarr = [];
+    const originalarr = [];
     for (let i = 0; i < 8; i++) {
       let z = [];
       for (let j = 0; j < 8; j++) {
         z.push("");
       }
-      arr.push(z);
+      originalarr.push(z);
     }
+    let arr = JSON.parse(JSON.stringify(originalarr));
+    const getX = (x) => Math.floor(x / 40);
+    const getY = (y) => Math.floor(y / 40) - 1;
+    const undo = () => {
+      console.log("undo!");
+      undoarr.length && redoarr.push(JSON.parse(JSON.stringify(arr)));
+      undoarr.length && (arr = undoarr.pop());
+      update();
+    };
+    const redo = () => {
+      console.log("redo!");
+      redoarr.length && undoarr.push(JSON.parse(JSON.stringify(arr)));
+      redoarr.length && (arr = redoarr.pop());
+      update();
+    };
+    const update = () => {
+      arr.forEach((row, i) => {
+        row.forEach((color, j) => {
+          ctx.fillStyle = color;
+          if (color === "") {
+            ctx.fillStyle = "black";
+          }
+          ctx.fillRect(i * 40, j * 40, 40, 40);
+          document.getElementById("output").value = arr
+            .map((a) => a.join("."))
+            .join(".");
+        });
+      });
+    };
     let down = false;
+    let control = false;
+    let shift = false;
     const ctx = document.querySelector("canvas").getContext("2d");
     document
       .querySelector("canvas")
@@ -31,22 +110,27 @@
     document
       .querySelector("canvas")
       .addEventListener("mouseup", () => (down = false));
+    document.addEventListener("keydown", ({ key }) => {
+      key === "Control" && (control = true);
+      key === "Shift" && (shift = true);
+      if (key.toLowerCase() === "z" && control && !shift) {
+        undo();
+      }
+      if (key.toLowerCase() === "z" && control && shift) {
+        redo();
+      }
+    });
+    document.addEventListener("keyup", ({ key }) => {
+      key === "Control" && (control = false);
+      key === "Shift" && (shift = false);
+    });
     document
       .querySelector("canvas")
       .addEventListener("mousemove", ({ x, y }) => {
-        if (down) {
-          const col = document.querySelector("#color").value;
-          arr[Math.floor(x / 40)][Math.floor(y / 40) - 1] = col;
-          ctx.fillStyle = col;
-          ctx.fillRect(
-            Math.floor(x / 40) * 40,
-            (Math.floor(y / 40) - 1) * 40,
-            40,
-            40
-          );
-          document.getElementById("output").value = arr
-            .map((a) => a.join("."))
-            .join(".");
+        if (down && arr[getX(x)][getY(y)] !== col) {
+          undoarr.push(JSON.parse(JSON.stringify(arr)));
+          arr[getX(x)][getY(y)] = col;
+          update();
         }
       });
     const copy = () => {
