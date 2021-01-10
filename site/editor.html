@@ -61,7 +61,7 @@
         <input type="color" id="color" />
         <button onclick="col = ''">Eraser</button>
         <button
-          onclick="arr = JSON.parse(JSON.stringify(originalarr));update()"
+          onclick="undoarr.push(JSON.parse(JSON.stringify(arr)));arr = JSON.parse(JSON.stringify(originalarr));update()"
         >
           Clear
         </button>
