@@ -35,3 +35,11 @@ You can print text to the screen with `game.text("text", x, y, "color")`. The de
 You can create a animation with `const animationName = game.animation(["sprite1", "sprite2"...], speed)` outside of `game.draw`. Speed defaults to one.
 
 You can print that animation with `game.sprite(game.animate(animationName), x, y)`.
+
+## Config
+
+You can configure parts of the game with the second argument to `setUpGame`, `config`. `config` is an object with all of the configurations set.
+
+### `excludeButtons`
+
+This is an array of buttons (`x, y, up, down, left, right`) that will be excluded fron the mobile version.
