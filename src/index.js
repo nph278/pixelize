@@ -103,7 +103,7 @@ const defaultTo = (obj, property, defaultValue) => {
 const setUpGame = (window, config) => {
   config = config || {};
   defaultTo(config, "excludeButtons", []); // Buttons to exclude on mobile version
-  defaultTo(config, "pauseKey", "Escape"); // Buttons to exclude on mobile version
+  defaultTo(config, "pauseKey", "Escape"); // Key to pause game
 
   /* This checks for mobile browsers */
 
