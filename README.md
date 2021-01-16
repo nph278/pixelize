@@ -42,4 +42,12 @@ You can configure parts of the game with the second argument to `setUpGame`, `co
 
 ### `excludeButtons`
 
-This is an array of buttons (`x, y, up, down, left, right`) that will be excluded fron the mobile version.
+This is an array of buttons (`x, y, up, down, left, right`) that will be excluded fron the mobile version. Defaults to `[]`.
+
+### `pauseKey`
+
+This is the key the user will press to pause the game. defaults to `"Escape"`.
+
+### `fps`
+
+The game's frames per second. Defaults to `30`.
