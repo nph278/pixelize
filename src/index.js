@@ -7,8 +7,9 @@ const keymap = {
 };
 
 class Game {
-  constructor(ctx, size) {
+  constructor(ctx, size, config) {
     this.ctx = ctx;
+    this.paused = false;
     this.ctx.font = `${size / 20}px courier`;
     this.size = size;
     this.sprites = {};
@@ -18,13 +19,18 @@ class Game {
     this.keys = {};
     this.running = false;
     this.playing = false;
+    this.config = config;
     this.animations = [];
     setInterval(() => {
+      this.ctx.clearRect(0, 0, this.size, this.size);
       if (this.running) {
-        this.update();
-        this.ctx.clearRect(0, 0, this.size, this.size);
-        this.draw();
-        this.time++;
+        if (!this.paused) {
+          this.update();
+          this.draw();
+          this.time++;
+        } else {
+          this.text("paused", 40, 50);
+        }
       }
     }, 33);
   }
@@ -97,6 +103,7 @@ const defaultTo = (obj, property, defaultValue) => {
 const setUpGame = (window, config) => {
   config = config || {};
   defaultTo(config, "excludeButtons", []); // Buttons to exclude on mobile version
+  defaultTo(config, "pauseKey", "Escape"); // Buttons to exclude on mobile version
 
   /* This checks for mobile browsers */
 
@@ -217,10 +224,13 @@ const setUpGame = (window, config) => {
       }
     });
   const ctx = window.document.getElementById("canvas").getContext("2d");
-  const game = new Game(ctx, size);
+  const game = new Game(ctx, size, config);
   game.text("Start", 43, 50);
   window.addEventListener("keydown", ({ key }) => {
     game.keys[key] = true;
+    if (key === game.config.pauseKey) {
+      game.paused = !game.paused;
+    }
   });
   window.addEventListener("keyup", ({ key }) => {
     game.keys[key] = false;
