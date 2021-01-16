@@ -46,7 +46,7 @@ This is an array of buttons (`x, y, up, down, left, right`) that will be exclude
 
 ### `pauseKey`
 
-This is the key the user will press to pause the game. defaults to `"Escape"`.
+This is the key the user will press to pause the game. Defaults to `"Escape"`.
 
 ### `fps`
 
