@@ -32,7 +32,7 @@ class Game {
           this.text("paused", 40, 50);
         }
       }
-    }, 33);
+    }, Math.floor(1000 / config.fps));
   }
   key(key) {
     return !!this.keys[key in keymap ? keymap[key] : key];
@@ -104,6 +104,7 @@ const setUpGame = (window, config) => {
   config = config || {};
   defaultTo(config, "excludeButtons", []); // Buttons to exclude on mobile version
   defaultTo(config, "pauseKey", "Escape"); // Key to pause game
+  defaultTo(config, "fps", 30); // Attempted FPS
 
   /* This checks for mobile browsers */
 
