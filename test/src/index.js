@@ -1,9 +1,11 @@
+import game from "./sprites";
+
 let x = 0;
 let y = 0;
 let score = 0;
 let boxes = [];
 let bullets = [];
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 10; i++) {
   boxes.push([
     Math.random() * 92,
     Math.random() * 92,
@@ -42,11 +44,9 @@ game.update = () => {
   boxes = boxes.map(([x2, y2, x3, y3]) => {
     if (x2 <= 0 || x2 >= 92) {
       x3 = -x3;
-      game.sound("sounds/chirp");
     }
     if (y2 <= 0 || y2 >= 92) {
       y3 = -y3;
-      game.sound("sounds/chirp");
     }
     x2 += x3;
     y2 += y3;

@@ -1,0 +1,9 @@
+{
+  "name": "Pixelize game",
+  "start_url": "/",
+  "icons": [],
+  "theme_color": "#FFFFFF",
+  "background_color": "#000000",
+  "display": "fullscreen",
+  "orientation": "portrait"
+}

@@ -1,3 +1,9 @@
+import setUpGame from "../../src/index";
+
+const game = setUpGame(window, {
+  fps: 60,
+});
+
 game.addSprite(
   "shipright",
   "#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00..#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00....#ce2a00.#041ece.#041ece.#ce2a00.....#ce2a00.#041ece.#041ece.#ce2a00.....#ce2a00.#ce2a00.#ce2a00.#ce2a00......#ce2a00.#ce2a00.......#ce2a00.#ce2a00..."
@@ -26,3 +32,5 @@ game.addSprite(
   "bulleth",
   "...........#ded000.#dea700.......#dea700.#ded000.......#ded000.#dea700.......#dea700.#ded000.......#ded000.#dea700.......#dea700.#ded000..........."
 );
+
+export default game;
