@@ -16,7 +16,7 @@ The game updates by calling `game.update`, then clears the screen, then `game.dr
 
 ### Sprites
 
-You can add a sprite with `game.addSprite("name", "sprite code")`. You can generate the sprite code at [the editor](https://pixelizer.netlify.app/site/editor.html). You can draw a sprite with `game.sprite("name", x, y)`. The game window is 100 by 100 game pixels. Each sprite is eight by eight;
+You can add a sprite with `game.addSprite("name", "sprite code")`. You can generate the sprite code at [the editor](https://pixelizer.netlify.app/editor.html). You can draw a sprite with `game.sprite("name", x, y)`. The game window is 100 by 100 game pixels. Each sprite is eight by eight;
 
 ## Sounds
 
