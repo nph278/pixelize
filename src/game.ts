@@ -28,7 +28,7 @@ export class Game {
     this.config = config || {};
     defaultTo(this.config, "excludeButtons", []); // Buttons to exclude on mobile version
     defaultTo(this.config, "pauseKey", "Escape"); // Key to pause game
-    defaultTo(this.config, "fps", 30); // Attempted FPS
+    defaultTo(this.config, "fps", 60); // Attempted FPS
   }
   key(key: string) {
     return !!this.keys[key in keymap ? keymap[key] : key];
