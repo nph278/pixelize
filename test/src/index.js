@@ -1,4 +1,4 @@
-import { Game } from "../../dist/index";
+import { Game } from "../../dist";
 import * as Sprites from "./sprites";
 
 const game = new Game({
