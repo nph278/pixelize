@@ -1,4 +1,9 @@
-import game from "./sprites";
+import { createGame, playSound } from "../../dist";
+import * as Sprites from "./sprites";
+
+const game = createGame({
+  fps: 60,
+});
 
 let x = 0;
 let y = 0;
@@ -34,7 +39,7 @@ game.update = () => {
   }
   if (game.key("z")) {
     if (z) {
-      game.sound("sounds/shoot");
+      playSound("sounds/shoot");
       bullets.push([x, y, direction]);
       z = false;
     }
@@ -77,7 +82,7 @@ game.update = () => {
           (["left", "right"].includes(b[2]) ? b[1] + 3 : b[1] + 1) <= by + 8
       )
     ) {
-      game.sound("sounds/no");
+      playSound("sounds/no");
       score++;
       boxes.splice(i, 1);
       boxes.push([
@@ -91,16 +96,31 @@ game.update = () => {
 };
 
 game.draw = () => {
-  game.sprite("ship" + direction, x, y);
+  if (direction === "up") {
+    game.sprite(Sprites.shipUp, x, y);
+  }
+  if (direction === "down") {
+    game.sprite(Sprites.shipDown, x, y);
+  }
+  if (direction === "left") {
+    game.sprite(Sprites.shipLeft, x, y);
+  }
+  if (direction === "right") {
+    game.sprite(Sprites.shipRight, x, y);
+  }
   boxes.forEach(([x2, y2]) => {
-    game.sprite("box", x2, y2);
+    game.sprite(Sprites.box, x2, y2);
   });
   bullets.forEach(([x2, y2, direction]) => {
     game.sprite(
-      ["up", "down"].includes(direction) ? "bulletv" : "bulleth",
+      ["up", "down"].includes(direction)
+        ? Sprites.bulletVertical
+        : Sprites.bulletHorizontal,
       x2,
       y2
     );
   });
   game.text(score.toString(), x, y);
 };
+
+game.mount(document.body);

@@ -1,36 +1,31 @@
-import setUpGame from "../../src/index";
+import { animation } from "../../dist";
 
-const game = setUpGame(window, {
-  fps: 60,
-});
-
-game.addSprite(
-  "shipright",
+export const shipRight = animation(
   "#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00..#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00....#ce2a00.#041ece.#041ece.#ce2a00.....#ce2a00.#041ece.#041ece.#ce2a00.....#ce2a00.#ce2a00.#ce2a00.#ce2a00......#ce2a00.#ce2a00.......#ce2a00.#ce2a00..."
 );
-game.addSprite(
-  "shipup",
-  "......#ce2a00.#ce2a00......#ce2a00.#ce2a00.#ce2a00...#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#041ece.#041ece.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#041ece.#041ece.#ce2a00.#ce2a00.#ce2a00...#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00......#ce2a00.#ce2a00.#ce2a00.......#ce2a00.#ce2a00"
-);
-game.addSprite(
-  "shipleft",
+export const shipLeft = animation(
   "...#ce2a00.#ce2a00.......#ce2a00.#ce2a00......#ce2a00.#ce2a00.#ce2a00.#ce2a00.....#ce2a00.#041ece.#041ece.#ce2a00.....#ce2a00.#041ece.#041ece.#ce2a00....#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00..#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00"
 );
-game.addSprite(
-  "shipdown",
+export const shipUp = animation(
+  "......#ce2a00.#ce2a00......#ce2a00.#ce2a00.#ce2a00...#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#041ece.#041ece.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#041ece.#041ece.#ce2a00.#ce2a00.#ce2a00...#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00......#ce2a00.#ce2a00.#ce2a00.......#ce2a00.#ce2a00"
+);
+export const shipDown = animation(
   "#ce2a00.#ce2a00.......#ce2a00.#ce2a00.#ce2a00......#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00...#ce2a00.#ce2a00.#ce2a00.#041ece.#041ece.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#041ece.#041ece.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00.#ce2a00...#ce2a00.#ce2a00.#ce2a00......#ce2a00.#ce2a00......"
 );
-game.addSprite(
-  "box",
+export const box = animation(
   "#ce2ade.#ce2ade.#ce2ade.#ce2ade.#ce2ade.#ce2ade.#ce2ade.#ce2ade.#ce2ade.......#ce2ade.#ce2ade.......#ce2ade.#ce2ade.......#ce2ade.#ce2ade.......#ce2ade.#ce2ade.......#ce2ade.#ce2ade.......#ce2ade.#ce2ade.#ce2ade.#ce2ade.#ce2ade.#ce2ade.#ce2ade.#ce2ade.#ce2ade"
 );
-game.addSprite(
-  "bulletv",
-  ".........................#dea700.#ded000.#dea700.#ded000.#dea700.#ded000...#ded000.#dea700.#ded000.#dea700.#ded000.#dea700........................."
+export const bulletVertical = animation(
+  [
+    ".........................#dea700.#ded000.#dea700.#ded000.#dea700.#ded000...#ded000.#dea700.#ded000.#dea700.#ded000.#dea700.........................",
+    "................................................................",
+  ],
+  4
 );
-game.addSprite(
-  "bulleth",
-  "...........#ded000.#dea700.......#dea700.#ded000.......#ded000.#dea700.......#dea700.#ded000.......#ded000.#dea700.......#dea700.#ded000..........."
+export const bulletHorizontal = animation(
+  [
+    "...........#ded000.#dea700.......#dea700.#ded000.......#ded000.#dea700.......#dea700.#ded000.......#ded000.#dea700.......#dea700.#ded000...........",
+    "................................................................",
+  ],
+  4
 );
-
-export default game;
