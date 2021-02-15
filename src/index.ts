@@ -1,13 +1,32 @@
-const keymap = {
-  up: "ArrowUp",
-  down: "ArrowDown",
-  left: "ArrowLeft",
-  right: "ArrowRight",
-  space: " ",
-};
+import { keymap } from "./keymap";
 
 class Game {
-  constructor(ctx, size, config) {
+  ctx: CanvasRenderingContext2D;
+  paused: boolean;
+  size: number;
+  sprites: {
+    [key: string]: string[][];
+  };
+  update: () => void;
+  draw: () => void;
+  time: number;
+  keys: {
+    [key: string]: boolean;
+  };
+  running: boolean;
+  playing: boolean;
+  config: {
+    [key: string]: any;
+  };
+  animations: [string[], number][];
+
+  constructor(
+    ctx: CanvasRenderingContext2D,
+    size: number,
+    config: {
+      [key: string]: any;
+    }
+  ) {
     this.ctx = ctx;
     this.paused = false;
     this.ctx.font = `${size / 20}px courier`;
@@ -34,31 +53,31 @@ class Game {
       }
     }, Math.floor(1000 / config.fps));
   }
-  key(key) {
+  key(key: string) {
     return !!this.keys[key in keymap ? keymap[key] : key];
   }
-  animation(sprites, time) {
+  animation(sprites: string[], time: number) {
     this.animations.push([sprites, time || 1]);
     return this.animations.length - 1;
   }
-  animate(id) {
+  animate(id: number) {
     return this.animations[id][0][
       Math.floor(this.time / this.animations[id][1]) %
         this.animations[id][0].length
     ];
   }
-  addSprite(name, sprite) {
+  addSprite(name: string, sprite: string) {
     let ready = 0;
     const arr = sprite.split(".");
     let newarr = [];
-    arr.forEach((e, i) => {
+    arr.forEach((_, i) => {
       !ready && newarr.push(arr.slice(i, i + 8));
       ready++;
       ready %= 8;
     });
     this.sprites[name] = newarr;
   }
-  sprite(name, x, y) {
+  sprite(name: string, x: number, y: number) {
     const sprite = this.sprites[name];
     if (sprite) {
       sprite.forEach((row, x1) =>
@@ -78,7 +97,7 @@ class Game {
       throw new ReferenceError(`No sprite named "${name}"`);
     }
   }
-  sound(file) {
+  sound(file: string) {
     if (!this.playing) {
       const audio = new Audio(`${file}.mp3`);
       this.playing = true;
@@ -89,18 +108,23 @@ class Game {
       }
     }
   }
-  text(text, x, y, color) {
+  text(text: string, x: number, y: number, color?: string) {
     color = color || "white";
     this.ctx.fillStyle = color;
     this.ctx.fillText(text, (x * this.size) / 100, (y * this.size) / 100);
   }
 }
 
-const defaultTo = (obj, property, defaultValue) => {
+const defaultTo = (obj: object, property: string, defaultValue: any) => {
   obj[property] = obj[property] === undefined ? defaultValue : obj[property];
 };
 
-const setUpGame = (window, config) => {
+const setUpGame = (
+  window: Window,
+  config: {
+    [key: string]: any;
+  }
+) => {
   config = config || {};
   defaultTo(config, "excludeButtons", []); // Buttons to exclude on mobile version
   defaultTo(config, "pauseKey", "Escape"); // Key to pause game
@@ -119,10 +143,10 @@ const setUpGame = (window, config) => {
       )
     )
       mobile = true;
-  })(navigator.userAgent || navigator.vendor || window.opera);
+  })(navigator.userAgent || navigator.vendor);
   let size =
     Math.floor(Math.min(window.innerHeight, window.innerWidth) / 100) * 100;
-  window.document.body.style.margin = 0;
+  window.document.body.style.margin = "0";
   window.document.body.style.overflow = "hidden";
   window.document.body.style.background = "black";
   window.document.body.style.userSelect = "none";
@@ -188,7 +212,7 @@ const setUpGame = (window, config) => {
     </div>
   `;
   window.document.querySelector("canvas").style.cursor = "pointer";
-  window.document.querySelector("canvas").addEventListener("click", (e) => {
+  window.document.querySelector("canvas").addEventListener("click", () => {
     game.running = true;
     window.document.querySelector("canvas").style.cursor = "auto";
   });
@@ -206,25 +230,26 @@ const setUpGame = (window, config) => {
       if (!config.excludeButtons.includes(shortKey[key])) {
         window.document
           .querySelector("#btn-" + key)
-          .addEventListener("touchstart", (e) => {
+          .addEventListener("touchstart", (e: TouchEvent) => {
             e.preventDefault();
             game.keys[key] = true;
           });
         window.document
           .querySelector("#btn-" + key)
-          .addEventListener("touchend", (e) => {
+          .addEventListener("touchend", (e: TouchEvent) => {
             e.preventDefault();
             game.keys[key] = false;
           });
         window.document
           .querySelector("#btn-" + key)
-          .addEventListener("touchcancel", (e) => {
+          .addEventListener("touchcancel", (e: TouchEvent) => {
             e.preventDefault();
             game.keys[key] = false;
           });
       }
     });
-  const ctx = window.document.getElementById("canvas").getContext("2d");
+  const canvas = window.document.getElementById("canvas")! as HTMLCanvasElement;
+  const ctx = canvas.getContext("2d");
   const game = new Game(ctx, size, config);
   game.text("Start", 43, 50);
   window.addEventListener("keydown", ({ key }) => {

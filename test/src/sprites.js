@@ -1,4 +1,4 @@
-import setUpGame from "../../src/index";
+import setUpGame from "../../dist/index";
 
 const game = setUpGame(window, {
   fps: 60,
