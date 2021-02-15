@@ -5,9 +5,6 @@ export class Game {
   ctx: CanvasRenderingContext2D | null;
   paused: boolean;
   size: number;
-  sprites: {
-    [key: string]: string[][];
-  };
   update: () => void;
   draw: () => void;
   time: number;
@@ -19,13 +16,11 @@ export class Game {
   config: {
     [key: string]: any;
   };
-  animations: [string[], number][];
 
   constructor(config: { [key: string]: any }) {
     this.ctx = null;
     this.paused = false;
     this.size = 0;
-    this.sprites = {};
     this.update = () => {};
     this.draw = () => {};
     this.time = 0;
@@ -36,7 +31,6 @@ export class Game {
     defaultTo(this.config, "excludeButtons", []); // Buttons to exclude on mobile version
     defaultTo(this.config, "pauseKey", "Escape"); // Key to pause game
     defaultTo(this.config, "fps", 30); // Attempted FPS
-    this.animations = [];
   }
   key(key: string) {
     return !!this.keys[key in keymap ? keymap[key] : key];
