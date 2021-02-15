@@ -15,11 +15,17 @@ export const shipDown = animation(
 export const box = animation(
   "#ce2ade.#ce2ade.#ce2ade.#ce2ade.#ce2ade.#ce2ade.#ce2ade.#ce2ade.#ce2ade.......#ce2ade.#ce2ade.......#ce2ade.#ce2ade.......#ce2ade.#ce2ade.......#ce2ade.#ce2ade.......#ce2ade.#ce2ade.......#ce2ade.#ce2ade.#ce2ade.#ce2ade.#ce2ade.#ce2ade.#ce2ade.#ce2ade.#ce2ade"
 );
-export const bulletVertical = animation([
-  ".........................#dea700.#ded000.#dea700.#ded000.#dea700.#ded000...#ded000.#dea700.#ded000.#dea700.#ded000.#dea700.........................",
-  ".........................#ded000.#dea700.#ded000.#dea700.#ded000.#dea700...#dea700.#ded000.#dea700.#ded000.#dea700.#ded000.........................",
-]);
-export const bulletHorizontal = animation([
-  "...........#ded000.#dea700.......#dea700.#ded000.......#ded000.#dea700.......#dea700.#ded000.......#ded000.#dea700.......#dea700.#ded000...........",
-  "...........#dea700.#ded000.......#ded000.#dea700.......#dea700.#ded000.......#ded000.#dea700.......#dea700.#ded000.......#ded000.#dea700...........",
-]);
+export const bulletVertical = animation(
+  [
+    ".........................#dea700.#ded000.#dea700.#ded000.#dea700.#ded000...#ded000.#dea700.#ded000.#dea700.#ded000.#dea700.........................",
+    "................................................................",
+  ],
+  4
+);
+export const bulletHorizontal = animation(
+  [
+    "...........#ded000.#dea700.......#dea700.#ded000.......#ded000.#dea700.......#dea700.#ded000.......#ded000.#dea700.......#dea700.#ded000...........",
+    "................................................................",
+  ],
+  4
+);
