@@ -1,6 +1,7 @@
 import { SpriteAnimation } from "./animation";
 import { isMobile } from "./ismobile";
 import { keymap } from "./keymap";
+import { Config } from "./config";
 
 export class Game {
   ctx: CanvasRenderingContext2D | null;
@@ -13,11 +14,9 @@ export class Game {
     [key: string]: boolean;
   };
   running: boolean;
-  config: {
-    [key: string]: any;
-  };
+  config: Config;
 
-  constructor(config: { [key: string]: any }) {
+  constructor(config: Partial<Config>) {
     this.ctx = null;
     this.paused = false;
     this.size = 0;
@@ -26,10 +25,10 @@ export class Game {
     this.time = 0;
     this.keys = {};
     this.running = false;
-    this.config = config || {};
-    defaultTo(this.config, "excludeButtons", []); // Buttons to exclude on mobile version
-    defaultTo(this.config, "pauseKey", "Escape"); // Key to pause game
-    defaultTo(this.config, "fps", 60); // Attempted FPS
+    config.excludeButtons = config.excludeButtons ?? [];
+    config.fps = config.fps ?? 60;
+    config.pauseKey = config.pauseKey ?? "Escape";
+    this.config = config! as Config;
   }
   key(key: string) {
     return !!this.keys[key in keymap ? keymap[key] : key];
@@ -215,7 +214,3 @@ export class Game {
     }, Math.floor(1000 / this.config.fps));
   }
 }
-
-const defaultTo = (obj: object, property: string, defaultValue: any) => {
-  obj[property] = obj[property] === undefined ? defaultValue : obj[property];
-};
