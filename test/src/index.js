@@ -1,4 +1,4 @@
-import { Game } from "../../dist";
+import { Game, playSound } from "../../dist";
 import * as Sprites from "./sprites";
 
 const game = new Game({
@@ -39,7 +39,7 @@ game.update = () => {
   }
   if (game.key("z")) {
     if (z) {
-      game.sound("sounds/shoot");
+      playSound("sounds/shoot");
       bullets.push([x, y, direction]);
       z = false;
     }
@@ -82,7 +82,7 @@ game.update = () => {
           (["left", "right"].includes(b[2]) ? b[1] + 3 : b[1] + 1) <= by + 8
       )
     ) {
-      game.sound("sounds/no");
+      playSound("sounds/no");
       score++;
       boxes.splice(i, 1);
       boxes.push([

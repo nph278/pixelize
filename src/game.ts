@@ -12,7 +12,6 @@ export class Game {
     [key: string]: boolean;
   };
   running: boolean;
-  playing: boolean;
   config: {
     [key: string]: any;
   };
@@ -26,7 +25,6 @@ export class Game {
     this.time = 0;
     this.keys = {};
     this.running = false;
-    this.playing = false;
     this.config = config || {};
     defaultTo(this.config, "excludeButtons", []); // Buttons to exclude on mobile version
     defaultTo(this.config, "pauseKey", "Escape"); // Key to pause game
@@ -60,17 +58,6 @@ export class Game {
       );
     } else {
       throw new ReferenceError(`No sprite named "${name}"`);
-    }
-  }
-  sound(file: string) {
-    if (!this.playing) {
-      const audio = new Audio(`${file}.mp3`);
-      this.playing = true;
-      try {
-        audio.play().then(() => (this.playing = false));
-      } catch {
-        throw new URIError(`No file named "${file}.mp3"`);
-      }
     }
   }
   text(text: string, x: number, y: number, color?: string) {
