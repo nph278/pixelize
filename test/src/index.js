@@ -1,4 +1,9 @@
-import game from "./sprites";
+import { Game } from "../../dist/index";
+import * as Sprites from "./sprites";
+
+const game = new Game({
+  fps: 60,
+});
 
 let x = 0;
 let y = 0;
@@ -91,13 +96,26 @@ game.update = () => {
 };
 
 game.draw = () => {
-  game.sprite("ship" + direction, x, y);
+  if (direction === "up") {
+    game.sprite(Sprites.ShipUp, x, y);
+  }
+  if (direction === "down") {
+    game.sprite(Sprites.ShipDown, x, y);
+  }
+  if (direction === "left") {
+    game.sprite(Sprites.ShipLeft, x, y);
+  }
+  if (direction === "right") {
+    game.sprite(Sprites.ShipRight, x, y);
+  }
   boxes.forEach(([x2, y2]) => {
-    game.sprite("box", x2, y2);
+    game.sprite(Sprites.Box, x2, y2);
   });
   bullets.forEach(([x2, y2, direction]) => {
     game.sprite(
-      ["up", "down"].includes(direction) ? "bulletv" : "bulleth",
+      ["up", "down"].includes(direction)
+        ? Sprites.BulletVertical
+        : Sprites.BulletHorizontal,
       x2,
       y2
     );

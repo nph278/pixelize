@@ -1,3 +1,4 @@
+import { SpriteAnimation } from "./animation";
 import { keymap } from "./keymap";
 
 export class Game {
@@ -40,31 +41,17 @@ export class Game {
   key(key: string) {
     return !!this.keys[key in keymap ? keymap[key] : key];
   }
-  animation(sprites: string[], time: number) {
-    this.animations.push([sprites, time || 1]);
-    return this.animations.length - 1;
-  }
-  animate(id: number) {
-    return this.animations[id][0][
-      Math.floor(this.time / this.animations[id][1]) %
-        this.animations[id][0].length
-    ];
-  }
-  addSprite(name: string, sprite: string) {
+  sprite(sprite: SpriteAnimation, x: number, y: number) {
     let ready = 0;
-    const arr = sprite.split(".");
-    let newarr = [];
+    const arr = sprite.frame(this.time).split(".");
+    let parsed = [];
     arr.forEach((_, i) => {
-      !ready && newarr.push(arr.slice(i, i + 8));
+      !ready && parsed.push(arr.slice(i, i + 8));
       ready++;
       ready %= 8;
     });
-    this.sprites[name] = newarr;
-  }
-  sprite(name: string, x: number, y: number) {
-    const sprite = this.sprites[name];
     if (sprite) {
-      sprite.forEach((row, x1) =>
+      parsed.forEach((row, x1) =>
         row.forEach((color, y1) => {
           if (color !== "") {
             this.ctx.fillStyle = color;
