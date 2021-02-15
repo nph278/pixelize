@@ -214,3 +214,7 @@ export class Game {
     }, Math.floor(1000 / this.config.fps));
   }
 }
+
+export const createGame = (config: Partial<Config>) => {
+  return new Game(config);
+};

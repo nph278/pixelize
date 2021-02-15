@@ -1,7 +1,7 @@
-import { Game, playSound } from "../../dist";
+import { createGame, playSound } from "../../dist";
 import * as Sprites from "./sprites";
 
-const game = new Game({
+const game = createGame({
   fps: 60,
 });
 
