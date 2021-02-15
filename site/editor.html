@@ -74,7 +74,10 @@
   </body>
   <script>
     let col = "#ffffff";
-    document.querySelector("#color").addEventListener("change", (e) => {
+    document.querySelector("#color").addEventListener("input", (e) => {
+      col = e.target.value;
+    });
+    document.querySelector("#color").addEventListener("click", (e) => {
       col = e.target.value;
     });
     let undoarr = [];
@@ -122,7 +125,12 @@
     const ctx = document.querySelector("canvas").getContext("2d");
     document
       .querySelector("canvas")
-      .addEventListener("mousedown", () => (down = true));
+      .addEventListener("mousedown", ({ x, y }) => {
+        down = true;
+        undoarr.push(JSON.parse(JSON.stringify(arr)));
+        arr[getX(x)][getY(y)] = col;
+        update();
+      });
     document
       .querySelector("canvas")
       .addEventListener("mouseup", () => (down = false));
