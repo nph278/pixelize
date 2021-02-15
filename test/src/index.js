@@ -104,3 +104,5 @@ game.draw = () => {
   });
   game.text(score.toString(), x, y);
 };
+
+game.mount(document.body);

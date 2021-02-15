@@ -1,6 +1,6 @@
-import setUpGame from "../../dist/index";
+import { Game } from "../../dist/index";
 
-const game = setUpGame(window, {
+const game = new Game({
   fps: 60,
 });
 
