@@ -97,25 +97,25 @@ game.update = () => {
 
 game.draw = () => {
   if (direction === "up") {
-    game.sprite(Sprites.ShipUp, x, y);
+    game.sprite(Sprites.shipUp, x, y);
   }
   if (direction === "down") {
-    game.sprite(Sprites.ShipDown, x, y);
+    game.sprite(Sprites.shipDown, x, y);
   }
   if (direction === "left") {
-    game.sprite(Sprites.ShipLeft, x, y);
+    game.sprite(Sprites.shipLeft, x, y);
   }
   if (direction === "right") {
-    game.sprite(Sprites.ShipRight, x, y);
+    game.sprite(Sprites.shipRight, x, y);
   }
   boxes.forEach(([x2, y2]) => {
-    game.sprite(Sprites.Box, x2, y2);
+    game.sprite(Sprites.box, x2, y2);
   });
   bullets.forEach(([x2, y2, direction]) => {
     game.sprite(
       ["up", "down"].includes(direction)
-        ? Sprites.BulletVertical
-        : Sprites.BulletHorizontal,
+        ? Sprites.bulletVertical
+        : Sprites.bulletHorizontal,
       x2,
       y2
     );
