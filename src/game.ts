@@ -44,7 +44,7 @@ export class Game {
     });
     if (sprite) {
       parsed.forEach((row, x1) =>
-        row.forEach((color, y1) => {
+        row.forEach((color: string, y1: number) => {
           if (color !== "") {
             this.ctx.fillStyle = color;
             this.ctx.fillRect(
@@ -56,8 +56,6 @@ export class Game {
           }
         })
       );
-    } else {
-      throw new ReferenceError(`No sprite named "${name}"`);
     }
   }
   text(text: string, x: number, y: number, color?: string) {
