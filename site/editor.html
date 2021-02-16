@@ -36,18 +36,24 @@
     }
 
     button {
-      background-color: black;
-      color: white;
+      background-color: inherit;
+      color: inherit;
+    }
+
+    .home {
+      padding-bottom: 1rem;
     }
   </style>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Editor</title>
+    <title>Editor - Pixelize Game Engine</title>
   </head>
   <body>
-    <a href=".">Home</a><br />
+    <div class="home">
+      <a href=".">Home</a>
+    </div>
     <div class="wraps">
       <div id="canvas-wrap" class="wrap">
         <canvas
@@ -92,7 +98,7 @@
     }
     let arr = JSON.parse(JSON.stringify(originalarr));
     const getX = (x) => Math.floor(x / 40);
-    const getY = (y) => Math.floor(y / 40) - 1;
+    const getY = (y) => Math.floor(y / 40);
     const undo = () => {
       console.log("undo!");
       undoarr.length && redoarr.push(JSON.parse(JSON.stringify(arr)));
@@ -125,10 +131,10 @@
     const ctx = document.querySelector("canvas").getContext("2d");
     document
       .querySelector("canvas")
-      .addEventListener("mousedown", ({ x, y }) => {
+      .addEventListener("mousedown", ({ offsetX, offsetY }) => {
         down = true;
         undoarr.push(JSON.parse(JSON.stringify(arr)));
-        arr[getX(x)][getY(y)] = col;
+        arr[getX(offsetX)][getY(offsetY)] = col;
         update();
       });
     document
@@ -150,10 +156,10 @@
     });
     document
       .querySelector("canvas")
-      .addEventListener("mousemove", ({ x, y }) => {
-        if (down && arr[getX(x)][getY(y)] !== col) {
+      .addEventListener("mousemove", ({ offsetX, offsetY }) => {
+        if (down && arr[getX(offsetX)][getY(offsetY)] !== col) {
           undoarr.push(JSON.parse(JSON.stringify(arr)));
-          arr[getX(x)][getY(y)] = col;
+          arr[getX(offsetX)][getY(offsetY)] = col;
           update();
         }
       });
