@@ -1,0 +1,16 @@
+---
+layout: layout.liquid
+title: Game.draw - Pixelize
+---
+
+[Home](/) | [Docs Home](/docs) | [Games](/docs/game)
+
+```js
+game.draw = () => {
+  // Draw Game Sprites
+};
+```
+
+`Game.draw` is called every frame after a [`Game`](/docs/game) is [`mounted`](/docs/game/mount). It is called after the screen is cleared, and after [`Game.update`](/docs/game/update).
+
+Sprites can be drawn to the sceen with [`Game.sprite`](/docs/sprite/gamesprite)
