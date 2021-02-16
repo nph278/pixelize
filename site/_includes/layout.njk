@@ -2,14 +2,14 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>{{ title }}</title>
+        <title>{{ title | safe }}</title>
         <link href="/css/prism.css" rel="stylesheet">
         <link href="/css/global.css" rel="stylesheet">
     </head>
     <body>
         <main>
-            <h1>{{ title }}</h1>
-            {{ content }}
+            <h1>{{ title | safe }}</h1>
+            {{ content | safe }}
         </main>
     </body>
 </html>
