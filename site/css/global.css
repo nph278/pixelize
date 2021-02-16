@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&family=Ubuntu:wght@300;400&display=swap");
+
+body {
+  font-family: "Ubuntu", sans-serif;
+  background: rgb(13, 17, 23);
+  color: rgb(200, 200, 200);
+}
+
+code {
+  font-family: "Fira Code", monospace;
+}
+
+ul {
+  list-style: "- ";
+}
+
+a {
+  color: white;
+}
