@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "test-build": "rollup -c",
-    "test-watch": "rollup -c -w"
+    "test-build": "rollup -c rollup.config.test.js",
+    "test-watch": "rollup -c rollup.config.test.js -w"
   },
   "keywords": [],
   "author": "NPH",
