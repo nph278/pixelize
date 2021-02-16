@@ -12,9 +12,7 @@
 
         <nav>
             {%- for page in navPages %}
-                {% if navPages.indexOf(page) > 0 %}
-                    |
-                {% endif %}
+                {% if navPages.indexOf(page) > 0 %}|{% endif %}
                 <a href="{{ page.url }}">{{ page.title }}</a>
             {%- endfor %}
         </nav>
