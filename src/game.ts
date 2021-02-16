@@ -196,7 +196,9 @@ export class Game {
       element.querySelector("canvas").height = size;
       this.ctx.font = `${size / 20}px courier`;
       this.size = size;
-      this.text("Start", 43, 50);
+      if (!this.running) {
+        this.text("Start", 43, 50);
+      }
     });
     this.size = size;
     this.ctx.font = `${this.size / 20}px courier`;
@@ -210,6 +212,8 @@ export class Game {
         } else {
           this.text("paused", 40, 50);
         }
+      } else {
+        this.text("Start", 43, 50);
       }
     }, Math.floor(1000 / this.config.fps));
   }
