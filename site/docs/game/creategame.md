@@ -1,9 +1,10 @@
 ---
-layout: layout.njk
-title: createGame - Pixelize
+eleventyNavigation:
+  key: createGame
+  parent: Games
 ---
 
-[Home](/) | [Docs Home](/docs) | [Games](/docs/game)
+# createGame - Pixelize
 
 ```js
 import { createGame } from "pixelize-engine";

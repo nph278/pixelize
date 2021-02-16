@@ -7,9 +7,21 @@
         <link href="/css/global.css" rel="stylesheet">
     </head>
     <body>
-        <main>
+        {% set navPages = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key) %}
+        {% set children = collections.all | eleventyNavigation(eleventyNavigation.key) %}
+
+        <nav>
+            {%- for page in navPages %}
+                {% if navPages.indexOf(page) > 0 %}
+                    |
+                {% endif %}
+                <a href="{{ page.url }}">{{ page.title }}</a>
+            {%- endfor %}
+        </nav>
+        <article>
             <h1>{{ title | safe }}</h1>
             {{ content | safe }}
-        </main>
+            {{ children | eleventyNavigationToHtml | safe }}
+        </article>
     </body>
 </html>

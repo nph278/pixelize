@@ -1,9 +1,10 @@
 ---
-layout: layout.njk
-title: Game.update - Pixelize
+eleventyNavigation:
+  key: Game.update
+  parent: Games
 ---
 
-[Home](/) | [Docs Home](/docs) | [Games](/docs/game)
+# Game.update - Pixelize
 
 ```js
 game.update = () => {

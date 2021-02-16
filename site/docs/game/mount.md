@@ -1,9 +1,10 @@
 ---
-layout: layout.njk
-title: Game.mount - Pixelize
+eleventyNavigation:
+  key: Game.mount
+  parent: Games
 ---
 
-[Home](/) | [Docs Home](/docs) | [Games](/docs/game)
+# Game.mount - Pixelize
 
 ```js
 game.update(document.body); // Mounts game to the body

@@ -1,9 +1,10 @@
 ---
-layout: layout.njk
-title: Game.sprite - Pixelize
+eleventyNavigation:
+  key: Game.sprite
+  parent: Sprites
 ---
 
-[Home](/) | [Docs Home](/docs) | [Sprites](/docs/sprite)
+# Game.sprite - Pixelize
 
 ```js
 game.draw = () => {

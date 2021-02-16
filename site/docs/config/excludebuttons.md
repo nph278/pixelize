@@ -1,9 +1,10 @@
 ---
-layout: layout.njk
-title: Config.excludeButtuns - Pixelize
+eleventyNavigation:
+  key: Config.excludeButtons
+  parent: Config
 ---
 
-[Home](/) | [Docs Home](/docs) | [Config](/docs/config)
+# Config.excludeButtuns - Pixelize
 
 ```js
 import { createGame } from "pixelize-engine";

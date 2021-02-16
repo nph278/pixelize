@@ -1,9 +1,10 @@
 ---
-layout: layout.njk
-title: Config.pauseKey - Pixelize
+eleventyNavigation:
+  key: Config.pauseKey
+  parent: Config
 ---
 
-[Home](/) | [Docs Home](/docs) | [Config](/docs/config)
+# Config.pauseKey - Pixelize
 
 ```js
 import { createGame } from "pixelize-engine";

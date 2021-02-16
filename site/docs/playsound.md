@@ -1,9 +1,10 @@
 ---
-layout: layout.njk
-title: playSound - Pixelize
+eleventyNavigation:
+  key: playSound
+  parent: Docs
 ---
 
-[Home](/) | [Docs Home](/docs)
+# playSound - Pixelize
 
 ```js
 import { playSound } from "pixelize-engine";

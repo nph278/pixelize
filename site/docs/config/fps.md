@@ -1,9 +1,10 @@
 ---
-layout: layout.njk
-title: Config.fps - Pixelize
+eleventyNavigation:
+  key: Config.fps
+  parent: Config
 ---
 
-[Home](/) | [Docs Home](/docs) | [Config](/docs/config)
+# Config.fps - Pixelize
 
 ```js
 import { createGame } from "pixelize-engine";

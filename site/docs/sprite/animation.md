@@ -1,9 +1,10 @@
 ---
-layout: layout.njk
-title: animation - Pixelize
+eleventyNavigation:
+  key: animation
+  parent: Sprites
 ---
 
-[Home](/) | [Docs Home](/docs) | [Sprites](/docs/sprite)
+# animation - Pixelize
 
 ```js
 import { animation } from "pixelize-engine";
