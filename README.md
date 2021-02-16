@@ -16,7 +16,7 @@ The game updates by calling `game.update`, then clears the screen, then `game.dr
 
 ### Sprites
 
-You can add a sprite with `game.addSprite("name", "sprite code")`. You can generate the sprite code at [the editor](https://pixelizer.netlify.app/editor.html). You can draw a sprite with `game.sprite("name", x, y)`. The game window is 100 by 100 game pixels. Each sprite is eight by eight;
+You can create a sprite with `const spriteName = animation("sprite")`. You can generate the sprite code at [the editor](https://pixelizer.netlify.app/editor.html). You can draw a sprite with `game.sprite("name", x, y)`. The game window is 100 by 100 game pixels. Each sprite is eight by eight. You can animate sprites by passing an array, and you can set the interval with the second parameter.
 
 ## Sounds
 
@@ -30,15 +30,9 @@ You can check if a key is pressed with `game.key("key name")`. Key name could be
 
 You can print text to the screen with `game.text("text", x, y, "color")`. The default color is white.
 
-## Animations
-
-You can create a animation with `const animationName = game.animation(["sprite1", "sprite2"...], speed)` outside of `game.draw`. Speed defaults to one.
-
-You can print that animation with `game.sprite(game.animate(animationName), x, y)`.
-
 ## Config
 
-You can configure parts of the game with the second argument to `setUpGame`, `config`. `config` is an object with all of the configurations set.
+You can configure parts of the game with the argument to `createGame`: `config`. `config` is an object with all of the configurations set.
 
 ### `excludeButtons`
 
@@ -50,4 +44,4 @@ This is the key the user will press to pause the game. Defaults to `"Escape"`.
 
 ### `fps`
 
-The game's frames per second. Defaults to `30`.
+The game's frames per second. Defaults to `60`.
