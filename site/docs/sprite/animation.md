@@ -2,9 +2,8 @@
 eleventyNavigation:
   key: animation
   parent: Sprites
+title: animation - Pixelize
 ---
-
-# animation - Pixelize
 
 ```js
 import { animation } from "pixelize-engine";

@@ -2,9 +2,8 @@
 eleventyNavigation:
   key: Game.update
   parent: Games
+title: Game.update - Pixelize
 ---
-
-# Game.update - Pixelize
 
 ```js
 game.update = () => {

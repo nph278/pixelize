@@ -2,9 +2,8 @@
 eleventyNavigation:
   key: Config.pauseKey
   parent: Config
+title: Config.pauseKey - Pixelize
 ---
-
-# Config.pauseKey - Pixelize
 
 ```js
 import { createGame } from "pixelize-engine";

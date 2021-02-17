@@ -2,9 +2,8 @@
 eleventyNavigation:
   key: Games
   parent: Docs
+title: Games - Pixelize
 ---
-
-# Games - Pixelize
 
 ```js
 import { Game } from "pixelize-engine";

@@ -2,9 +2,8 @@
 eleventyNavigation:
   key: Game.mount
   parent: Games
+title: Game.mount - Pixelize
 ---
-
-# Game.mount - Pixelize
 
 ```js
 game.update(document.body); // Mounts game to the body

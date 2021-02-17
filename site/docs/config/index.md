@@ -2,9 +2,8 @@
 eleventyNavigation:
   key: Config
   parent: Docs
+title: Config - Pixelize
 ---
-
-# Config - Pixelize
 
 ```js
 import { createGame } from "pixelize-engine";

@@ -2,9 +2,8 @@
 eleventyNavigation:
   key: Config.excludeButtons
   parent: Config
+title: Config.excludeButtuns - Pixelize
 ---
-
-# Config.excludeButtuns - Pixelize
 
 ```js
 import { createGame } from "pixelize-engine";

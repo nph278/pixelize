@@ -2,9 +2,8 @@
 eleventyNavigation:
   key: Config.fps
   parent: Config
+title: Config.fps - Pixelize
 ---
-
-# Config.fps - Pixelize
 
 ```js
 import { createGame } from "pixelize-engine";

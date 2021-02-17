@@ -2,9 +2,8 @@
 eleventyNavigation:
   key: createGame
   parent: Games
+title: createGame - Pixelize
 ---
-
-# createGame - Pixelize
 
 ```js
 import { createGame } from "pixelize-engine";

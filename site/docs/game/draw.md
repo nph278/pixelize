@@ -2,9 +2,8 @@
 eleventyNavigation:
   key: Game.draw
   parent: Games
+title: Game.draw - Pixelize
 ---
-
-# Game.draw - Pixelize
 
 ```js
 game.draw = () => {

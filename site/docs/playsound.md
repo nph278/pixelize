@@ -4,7 +4,7 @@ eleventyNavigation:
   parent: Docs
 ---
 
-# playSound - Pixelize
+title: playSound - Pixelize
 
 ```js
 import { playSound } from "pixelize-engine";
